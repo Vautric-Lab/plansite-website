@@ -1,25 +1,51 @@
-Politique de Confidentialité (Privacy Policy)
-Dernière mise à jour : 4 mai 2026
-Bienvenue sur PlanSite. La protection de vos données personnelles est une priorité pour nous. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre application mobile.
-1. Collecte des Données
-Nous collectons les informations suivantes pour assurer le bon fonctionnement de l'application :
-Informations de compte : Email et nom (via l'authentification Supabase).
-Données professionnelles : Devis, factures et informations clients que vous créez (stockés localement via Drift et synchronisés sur Supabase).
-Données techniques : Informations de base sur l'appareil pour garantir la compatibilité de l'application.
-2. Utilisation des Données
-Vos données sont utilisées exclusivement pour :
-Gérer votre compte utilisateur et sécuriser vos accès.
-Synchroniser vos documents entre vos différents appareils.
-Améliorer nos services via l'assistant intelligent (Google Gemini API). Note : Vos données personnelles ne sont jamais utilisées pour entraîner des modèles d'IA tiers.
-3. Stockage et Sécurité
-Stockage local : Vos données sont stockées sur votre appareil via une base de données sécurisée (Drift/SQLite).
-Cloud : Les données synchronisées sont hébergées sur des serveurs sécurisés via Supabase.
-Sécurité : Nous utilisons des protocoles de sécurité standards (RLS - Row Level Security) pour garantir que vous seul pouvez accéder à vos données.
-4. Services Tiers
-PlanSite utilise les services suivants pour fonctionner :
-Supabase : Gestion de l'authentification et de la base de données cloud.
-Google Gemini : Traitement du langage naturel pour la recherche intelligente (sans stockage permanent de vos entrées vocales ou textuelles par Google).
-5. Vos Droits
-Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Vous pouvez supprimer votre compte et toutes les données associées directement depuis les paramètres de l'application.
-6. Contact
-Pour toute question concernant cette politique, vous pouvez nous contacter à : contact@plansite.fr
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politique de Confidentialité - PlanSite</title>
+    <style>
+        :root { --blue: #0A84FF; --text: #1C1C1E; --text-sec: #636366; --bg: #F2F2F7; --border: #EEEEEE; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); line-height: 1.6; margin: 0; padding: 40px 20px; background-color: var(--bg); -webkit-font-smoothing: antialiased; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border); }
+        h1 { color: var(--blue); font-weight: 800; font-size: 32px; margin-top: 0; margin-bottom: 24px; letter-spacing: -1px; }
+        h2 { font-size: 20px; margin-top: 32px; margin-bottom: 12px; color: var(--text); }
+        p, li { color: var(--text-sec); font-size: 15px; margin-bottom: 16px; }
+        a { color: var(--blue); text-decoration: none; font-weight: 600; }
+        .back-link { display: inline-block; margin-bottom: 32px; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Retour à l'accueil</a>
+        <h1>Politique de Confidentialité</h1>
+        <p><strong>Dernière mise à jour :</strong> 4 mai 2026</p>
+
+        <h2>1. Collecte des Données</h2>
+        <p>Nous collectons les informations suivantes pour assurer le bon fonctionnement de l'application :</p>
+        <ul>
+            <li><strong>Informations de compte :</strong> Email et nom (via l'authentification Supabase).</li>
+            <li><strong>Données professionnelles :</strong> Devis, factures et informations clients que vous créez (stockés localement via Drift et synchronisés sur Supabase).</li>
+            <li><strong>Données techniques :</strong> Informations de base sur l'appareil pour garantir la compatibilité de l'application.</li>
+        </ul>
+
+        <h2>2. Utilisation des Données</h2>
+        <p>Vos données sont utilisées exclusivement pour :</p>
+        <ul>
+            <li>Gérer votre compte utilisateur et sécuriser vos accès.</li>
+            <li>Synchroniser vos documents entre vos différents appareils.</li>
+            <li>Améliorer nos services via l'assistant intelligent (Google Gemini API). <em>Note : Vos données personnelles ne sont jamais utilisées pour entraîner des modèles d'IA tiers.</em></li>
+        </ul>
+
+        <h2>3. Stockage et Sécurité</h2>
+        <ul>
+            <li><strong>Stockage local :</strong> Vos données sont stockées sur votre appareil via une base de données sécurisée (Drift/SQLite).</li>
+            <li><strong>Cloud :</strong> Les données synchronisées sont hébergées sur des serveurs sécurisés via Supabase.</li>
+            <li><strong>Sécurité :</strong> Nous utilisons des protocoles de sécurité standards pour protéger vos informations.</li>
+        </ul>
+
+        <h2>4. Vos droits (RGPD)</h2>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données. Pour exercer ces droits, veuillez nous contacter à l'adresse suivante : <a href="mailto:contact@plansite.fr">contact@plansite.fr</a>.</p>
+    </div>
+</body>
+</html>
