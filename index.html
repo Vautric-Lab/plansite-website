@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlanSite</title>
+<style>
+    :root {
+        --blue: #0A84FF;
+        --text: #1C1C1E;
+        --text-sec: #636366;
+        --bg: #F2F2F7;
+        --border: #EEEEEE;
+    }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        color: var(--text);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        -webkit-font-smoothing: antialiased;
+    }
+    * { box-sizing: border-box; }
+    p, h1, h2, h3 { margin-top: 0; }
+    .fade-up {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div style="padding-top: 56px; padding-bottom: 56px; background: white; text-align: center; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(10,132,255,0.06) 0%, transparent 70%); pointer-events: none;"></div>
+
+    <div class="fade-up">
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: #EBF5FF; color: var(--blue); font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 50px; margin-bottom: 28px;">
+            <span style="width: 7px; height: 7px; background: var(--blue); border-radius: 50%; display: inline-block;"></span>
+            Bientôt disponible — iOS & Android
+        </div>
+        <h1 style="font-weight: 800; font-size: clamp(36px,8vw,68px); line-height: 1.05; letter-spacing: -2px; color: var(--text); max-width: 740px; margin: 0 auto 22px; padding: 0 20px;">
+            Votre devis BTP<br />en <span style="color: var(--blue);">2 minutes</span>,<br />sur chantier
+        </h1>
+        <p style="font-size: clamp(15px,2.5vw,18px); color: var(--text-sec); max-width: 460px; margin: 0 auto 12px; padding: 0 20px; line-height: 1.55;">
+            L'application qui permet aux artisans français de créer des devis professionnels directement depuis le terrain.
+        </p>
+        <p style="font-size: 13px; color: var(--text-sec); margin-bottom: 36px; font-weight: 600;">
+            162 000 articles BTP · Prix régionaux 2026 · Fonctionne hors ligne
+        </p>
+        <div style="margin-bottom: 56px; padding: 0 20px;">
+            <a href="mailto:contact@plansite.fr?subject=Je veux tester PlanSite" style="display: inline-flex; align-items: center; gap: 10px; background: var(--blue); color: white; padding: 16px 34px; border-radius: 50px; font-size: 16px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 32px rgba(10,132,255,0.28);">📬 Être notifié au lancement</a>
+        </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="fade-up" style="transition-delay: 0.15s;">
+        <div style="max-width: 260px; margin: 0 auto; padding: 0 16px;">
+            <div style="background: var(--text); border-radius: 44px; padding: 10px; box-shadow: 0 40px 100px rgba(0,0,0,0.3);">
+                <div style="background: var(--bg); border-radius: 36px; overflow: hidden; aspect-ratio: 9/19;">
+                    <div style="position: relative; z-index: 10;">
+                        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 90px; height: 26px; background: var(--text); border-radius: 20px;"></div>
+                    </div>
+                    <div style="background: white; padding: 48px 14px 8px; border-bottom: 1px solid var(--border); text-align: center;">
+                        <div style="font-weight: 800; font-size: 13px; color: var(--text);">Mes documents</div>
+                    </div>
+                    <div style="display: flex; background: white; border-bottom: 1px solid var(--border);">
+                        <div style="flex: 1; text-align: center; padding: 7px 0 5px; font-size: 10px; font-weight: 700; color: var(--blue); border-bottom: 2px solid var(--blue);">Devis</div>
+                        <div style="flex: 1; text-align: center; padding: 7px 0 5px; font-size: 10px; color: var(--text-sec);">Facture</div>
+                    </div>
+                    <div style="padding: 8px 7px; display: flex; flex-direction: column; gap: 6px;">
+                        <div style="background: white; border-radius: 11px; padding: 8px 10px; display: flex; align-items: center; gap: 7px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                            <div style="width: 28px; height: 28px; background: #EBF5FF; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">📄</div>
+                            <div style="flex: 1; min-width: 0; text-align: left;">
+                                <div style="font-weight: 700; font-size: 10px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Dubois Maçonnerie</div>
+                                <div style="font-size: 8px; color: var(--text-sec);">#DEV-2026-003</div>
+                            </div>
+                            <div style="padding: 2px 6px; border-radius: 20px; font-size: 7px; font-weight: 700; background: #FF9500; color: white; flex-shrink: 0;">Envoyé</div>
+                        </div>
+                        <div style="background: white; border-radius: 11px; padding: 8px 10px; display: flex; align-items: center; gap: 7px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                            <div style="width: 28px; height: 28px; background: #EBF5FF; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">📄</div>
+                            <div style="flex: 1; min-width: 0; text-align: left;">
+                                <div style="font-weight: 700; font-size: 10px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">SCI Les Oliviers</div>
+                                <div style="font-size: 8px; color: var(--text-sec);">#DEV-2026-002</div>
+                            </div>
+                            <div style="padding: 2px 6px; border-radius: 20px; font-size: 7px; font-weight: 700; background: #34C759; color: white; flex-shrink: 0;">Signé</div>
+                        </div>
+                        <div style="background: white; border-radius: 11px; padding: 8px 10px; display: flex; align-items: center; gap: 7px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                            <div style="width: 28px; height: 28px; background: #EBF5FF; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">📄</div>
+                            <div style="flex: 1; min-width: 0; text-align: left;">
+                                <div style="font-weight: 700; font-size: 10px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Chantier Provence</div>
+                                <div style="font-size: 8px; color: var(--text-sec);">#DEV-2026-001</div>
+                            </div>
+                            <div style="padding: 2px 6px; border-radius: 20px; font-size: 7px; font-weight: 700; background: #E5E5EA; color: #636366; flex-shrink: 0;">Brouillon</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; padding: 2px 12px 4px;">
+                        <div style="width: 32px; height: 32px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; box-shadow: 0 4px 12px rgba(10,132,255,0.4);">+</div>
+                    </div>
+                    <div style="background: white; border-top: 1px solid var(--border); padding: 5px 4px 8px; display: flex; justify-content: space-around;">
+                        <div style="font-size: 14px; opacity: 0.4; color: var(--text-sec);">🏠</div>
+                        <div style="font-size: 14px; opacity: 0.4; color: var(--text-sec);">📅</div>
+                        <div style="font-size: 14px; opacity: 0.4; color: var(--text-sec);">💼</div>
+                        <div style="font-size: 14px; opacity: 1; color: var(--blue);">📁</div>
+                        <div style="font-size: 14px; opacity: 0.4; color: var(--text-sec);">👥</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TRUST BAR -->
+<div style="background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 24px;">
+    <div style="display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-sec);"><span style="font-size: 17px;">📦</span>162 000 articles BTP</div>
+    <div style="display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-sec);"><span style="font-size: 17px;">📍</span>Prix régionaux 2026</div>
+    <div style="display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-sec);"><span style="font-size: 17px;">📶</span>Fonctionne hors ligne</div>
+    <div style="display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--text-sec);"><span style="font-size: 17px;">🧾</span>Prêt facturation électronique</div>
+</div>
+
+<!-- FEATURES -->
+<div style="padding: 72px 20px; background: white;">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div class="fade-up">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">Fonctionnalités</div>
+            <h2 style="font-weight: 800; font-size: clamp(26px,5vw,40px); letter-spacing: -1px; color: var(--text); margin-bottom: 10px;">Tout ce dont l'artisan a besoin</h2>
+            <p style="font-size: 16px; color: var(--text-sec); margin-bottom: 44px; max-width: 500px; line-height: 1.55;">Conçu pour être utilisé directement sur le terrain, sans formation ni manuel. Rapide, fiable, professionnel.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 14px;">
+            <div class="fade-up" style="transition-delay: 0s;">
+                <div style="background: var(--bg); border-radius: 18px; padding: 24px; border: 1px solid var(--border); height: 100%;">
+                    <div style="font-size: 28px; margin-bottom: 14px;">🧠</div>
+                    <div style="font-weight: 800; font-size: 16px; color: var(--text); margin-bottom: 8px;">Recherche IA par description</div>
+                    <p style="font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 0;">Décrivez le chantier en français naturel — PlanSite trouve les articles et leur prix instantanément, sans catalogue PDF.</p>
+                </div>
+            </div>
+            <div class="fade-up" style="transition-delay: 0.07s;">
+                <div style="background: var(--bg); border-radius: 18px; padding: 24px; border: 1px solid var(--border); height: 100%;">
+                    <div style="font-size: 28px; margin-bottom: 14px;">🎙️</div>
+                    <div style="font-weight: 800; font-size: 16px; color: var(--text); margin-bottom: 8px;">Recherche vocale</div>
+                    <p style="font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 0;">Parlez à l'appli mains libres. Idéal sur chantier quand on ne peut pas taper.</p>
+                </div>
+            </div>
+            <div class="fade-up" style="transition-delay: 0.14s;">
+                <div style="background: var(--bg); border-radius: 18px; padding: 24px; border: 1px solid var(--border); height: 100%;">
+                    <div style="font-size: 28px; margin-bottom: 14px;">📄</div>
+                    <div style="font-weight: 800; font-size: 16px; color: var(--text); margin-bottom: 8px;">PDF professionnel en 1 clic</div>
+                    <p style="font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 0;">Devis généré automatiquement en PDF prêt à envoyer. Mise en page soignée, mentions légales incluses.</p>
+                </div>
+            </div>
+            <div class="fade-up" style="transition-delay: 0.21s;">
+                <div style="background: var(--bg); border-radius: 18px; padding: 24px; border: 1px solid var(--border); height: 100%;">
+                    <div style="font-size: 28px; margin-bottom: 14px;">📚</div>
+                    <div style="font-weight: 800; font-size: 16px; color: var(--text); margin-bottom: 8px;">162 000 articles BTP</div>
+                    <p style="font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 0;">Base complète par corps de métier — maçonnerie, terrassement, électricité, plomberie, peinture et bien plus.</p>
+                </div>
+            </div>
+            <div class="fade-up" style="transition-delay: 0.28s;">
+                <div style="background: var(--bg); border-radius: 18px; padding: 24px; border: 1px solid var(--border); height: 100%;">
+                    <div style="font-size: 28px; margin-bottom: 14px;">📶</div>
+                    <div style="font-weight: 800; font-size: 16px; color: var(--text); margin-bottom: 8px;">Fonctionne sans connexion</div>
+                    <p style="font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 0;">Pas de signal sur le chantier ? Aucun problème. PlanSite tourne entièrement en local sur votre appareil.</p>
+                </div>
+            </div>
+            <div class="fade-up" style="transition-delay: 0.35s;">
+                <div style="background: var(--bg); border-radius: 18px; padding: 24px; border: 1px solid var(--border); height: 100%;">
+                    <div style="font-size: 28px; margin-bottom: 14px;">🧾</div>
+                    <div style="font-weight: 800; font-size: 16px; color: var(--text); margin-bottom: 8px;">Prêt pour 2026 / 2027</div>
+                    <p style="font-size: 13px; color: var(--text-sec); line-height: 1.6; margin-bottom: 0;">Compatible avec la réforme de la facturation électronique obligatoire pour les artisans français.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="padding: 72px 20px; background: var(--text);">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div class="fade-up">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">Comment ça marche</div>
+            <h2 style="font-weight: 800; font-size: clamp(26px,5vw,40px); letter-spacing: -1px; color: white; margin-bottom: 10px;">Votre devis, en 3 étapes</h2>
+            <p style="font-size: 16px; color: rgba(255,255,255,0.55); margin-bottom: 48px; line-height: 1.55;">Pas de formation. Pas de manuel. Votre premier devis en 2 minutes.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px;">
+            <div class="fade-up" style="transition-delay: 0s;">
+                <div style="font-weight: 800; font-size: 52px; color: var(--blue); opacity: 0.7; line-height: 1; margin-bottom: 14px;">01</div>
+                <div style="font-weight: 800; font-size: 17px; color: white; margin-bottom: 10px;">Décrivez le chantier</div>
+                <p style="font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 0;">Tapez ou dictez votre description en français. "Rénovation salle de bain avec carrelage et nouvelle douche."</p>
+            </div>
+            <div class="fade-up" style="transition-delay: 0.1s;">
+                <div style="font-weight: 800; font-size: 52px; color: var(--blue); opacity: 0.7; line-height: 1; margin-bottom: 14px;">02</div>
+                <div style="font-weight: 800; font-size: 17px; color: white; margin-bottom: 10px;">L'IA trouve les articles</div>
+                <p style="font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 0;">PlanSite sélectionne les articles correspondants dans sa base de 162 000 prix avec les tarifs régionaux à jour.</p>
+            </div>
+            <div class="fade-up" style="transition-delay: 0.2s;">
+                <div style="font-weight: 800; font-size: 52px; color: var(--blue); opacity: 0.7; line-height: 1; margin-bottom: 14px;">03</div>
+                <div style="font-weight: 800; font-size: 17px; color: white; margin-bottom: 10px;">Envoyez le devis</div>
+                <p style="font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 0;">Ajustez les quantités, générez le PDF, partagez directement depuis votre téléphone. Le tout en 2 minutes.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI SPOTLIGHT -->
+<div style="padding: 72px 20px; background: var(--bg); border-top: 1px solid var(--border);">
+    <div style="max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px; align-items: center;">
+        <div class="fade-up">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">Intelligence artificielle</div>
+            <h2 style="font-weight: 800; font-size: clamp(26px,5vw,38px); letter-spacing: -1px; color: var(--text); margin-bottom: 14px;">Parlez,<br />PlanSite comprend</h2>
+            <p style="font-size: 16px; color: var(--text-sec); line-height: 1.6; margin-bottom: 0;">Finies les longues recherches dans des catalogues PDF. Décrivez ce que vous faites — on trouve le reste, avec les bons prix pour votre région.</p>
+        </div>
+        <div class="fade-up" style="transition-delay: 0.1s;">
+            <div style="background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.1); border: 1px solid var(--border);">
+                <div style="background: var(--text); padding: 12px 16px; display: flex; gap: 7px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: #FF5F57;"></div>
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: #FEBC2E;"></div>
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: #28C840;"></div>
+                </div>
+                <div style="padding: 18px;">
+                    <div style="background: var(--bg); border: 2px solid var(--blue); border-radius: 12px; padding: 12px 14px; font-size: 13px; color: var(--text); font-style: italic; line-height: 1.4; margin-bottom: 14px;">
+                        "Rénovation salle de bain avec carrelage et nouvelle douche"
+                    </div>
+                    <div style="font-size: 10px; color: var(--text-sec); margin-bottom: 10px; font-weight: 600;">4 articles trouvés dans votre région</div>
+                    <div style="display: flex; flex-direction: column; gap: 7px;">
+                        <div style="display: flex; align-items: center; padding: 9px 11px; background: var(--bg); border-radius: 10px; font-size: 12px; gap: 8px;">
+                            <span style="color: var(--text); font-weight: 600; flex: 1;">Dépose carrelage existant</span>
+                            <span style="color: var(--text-sec); font-size: 11px;">m²</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 9px 11px; background: var(--bg); border-radius: 10px; font-size: 12px; gap: 8px;">
+                            <span style="color: var(--text); font-weight: 600; flex: 1;">Fourniture et pose carrelage sol</span>
+                            <span style="color: var(--text-sec); font-size: 11px;">m²</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 9px 11px; background: var(--bg); border-radius: 10px; font-size: 12px; gap: 8px;">
+                            <span style="color: var(--text); font-weight: 600; flex: 1;">Receveur de douche à l'italienne</span>
+                            <span style="color: var(--text-sec); font-size: 11px;">u</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 9px 11px; background: var(--bg); border-radius: 10px; font-size: 12px; gap: 8px;">
+                            <span style="color: var(--text); font-weight: 600; flex: 1;">Faïence murale salle de bain</span>
+                            <span style="color: var(--text-sec); font-size: 11px;">m²</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TESTIMONIAL -->
+<div style="padding: 72px 20px; background: white; text-align: center;">
+    <div class="fade-up">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 28px;">Témoignages</div>
+            <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px 28px; margin-bottom: 20px;">
+                <div style="font-size: 40px; color: var(--blue); line-height: 1; margin-bottom: 14px;">"</div>
+                <p style="font-weight: 700; font-size: clamp(16px,3vw,21px); color: var(--text); line-height: 1.4; letter-spacing: -0.3px; margin-bottom: 24px; font-style: italic;">
+                    Avant je passais une heure sur chaque devis. Maintenant c'est fait avant de quitter le chantier.
+                </p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                    <div style="width: 42px; height: 42px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 17px; color: white;">A</div>
+                    <div style="text-align: left;">
+                        <div style="font-weight: 700; font-size: 14px; color: var(--text);">Un artisan BTP</div>
+                        <div style="font-size: 12px; color: var(--text-sec);">Terrassier — Sud de la France</div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 12px; color: var(--text-sec); font-style: italic; margin-bottom: 0;">PlanSite est actuellement en phase de test avec des artisans BTP locaux.</p>
+        </div>
+    </div>
+</div>
+
+<!-- PRIVACY -->
+<div style="padding: 64px 20px; background: var(--bg); border-top: 1px solid var(--border);">
+    <div style="max-width: 720px; margin: 0 auto;">
+        <div class="fade-up">
+            <div style="font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">Confidentialité</div>
+            <h2 style="font-weight: 800; font-size: clamp(22px,4vw,34px); letter-spacing: -1px; color: var(--text); margin-bottom: 14px;">Vos données vous appartiennent</h2>
+            <p style="font-size: 15px; color: var(--text-sec); line-height: 1.6; margin-bottom: 28px;">Vos devis, factures et informations clients sont stockés localement sur votre appareil — ils ne quittent pas votre téléphone sans votre accord.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                <div style="background: white; border-radius: 14px; padding: 18px; border: 1px solid var(--border);">
+                    <div style="font-size: 22px; margin-bottom: 8px;">🔒</div>
+                    <div style="font-weight: 700; font-size: 13px; color: var(--text); margin-bottom: 4px;">Stockage local</div>
+                    <p style="font-size: 12px; color: var(--text-sec); line-height: 1.5; margin-bottom: 0;">Sur votre appareil, pas sur nos serveurs.</p>
+                </div>
+                <div style="background: white; border-radius: 14px; padding: 18px; border: 1px solid var(--border);">
+                    <div style="font-size: 22px; margin-bottom: 8px;">🚫</div>
+                    <div style="font-weight: 700; font-size: 13px; color: var(--text); margin-bottom: 4px;">Aucune publicité</div>
+                    <p style="font-size: 12px; color: var(--text-sec); line-height: 1.5; margin-bottom: 0;">Vos données ne sont jamais vendues.</p>
+                </div>
+                <div style="background: white; border-radius: 14px; padding: 18px; border: 1px solid var(--border);">
+                    <div style="font-size: 22px; margin-bottom: 8px;">🇪🇺</div>
+                    <div style="font-weight: 700; font-size: 13px; color: var(--text); margin-bottom: 4px;">Conforme RGPD</div>
+                    <p style="font-size: 12px; color: var(--text-sec); line-height: 1.5; margin-bottom: 0;">Accès, correction ou suppression à tout moment.</p>
+                </div>
+            </div>
+            <a href="https://plansite.fr/privacy" style="color: var(--blue); font-size: 13px; font-weight: 600; text-decoration: none;">Lire la politique de confidentialité complète →</a>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+<div style="padding: 72px 20px; background: var(--blue); text-align: center;">
+    <div class="fade-up">
+        <h2 style="font-weight: 800; font-size: clamp(26px,5vw,40px); color: white; letter-spacing: -1px; margin-bottom: 14px;">Prêt pour le lancement ?</h2>
+        <p style="font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 36px; max-width: 400px; margin: 0 auto 36px; line-height: 1.6;">
+            Bientôt disponible sur iOS et Android. Inscrivez-vous pour être notifié en premier et accéder à la bêta.
+        </p>
+        <a href="mailto:contact@plansite.fr?subject=Je veux tester PlanSite" style="display: inline-flex; align-items: center; gap: 10px; background: white; color: var(--text); padding: 15px 32px; border-radius: 50px; font-weight: 700; font-size: 16px; text-decoration: none; box-shadow: 0 8px 30px rgba(0,0,0,0.15);">
+            📬 Être notifié au lancement
+        </a>
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <span style="font-size: 12px; color: rgba(255,255,255,0.65);">App Store ·</span>
+            <span style="font-size: 12px; color: rgba(255,255,255,0.65);">Google Play ·</span>
+            <span style="font-size: 12px; color: rgba(255,255,255,0.65);">Bientôt disponible</span>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div style="background: var(--text); padding: 44px 24px; text-align: center;">
+    <div style="font-weight: 800; font-size: 22px; color: white; margin-bottom: 6px;">Plan<span style="color: var(--blue);">Site</span></div>
+    <div style="font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 4px;">Le chiffrage BTP intelligent</div>
+    <div style="font-size: 12px; color: rgba(255,255,255,0.22); margin-bottom: 24px;">Fait pour les artisans, par des artisans</div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-bottom: 24px;">
+        <a href="https://plansite.fr/privacy" style="color: rgba(255,255,255,0.45); font-size: 13px; text-decoration: none;">Politique de confidentialité</a>
+        <a href="mailto:contact@plansite.fr" style="color: rgba(255,255,255,0.45); font-size: 13px; text-decoration: none;">contact@plansite.fr</a>
+        <a href="https://plansite.fr" style="color: rgba(255,255,255,0.45); font-size: 13px; text-decoration: none;">plansite.fr</a>
+    </div>
+    <div style="font-size: 11px; color: rgba(255,255,255,0.18);">© 2026 Vautric Lab — plansite.fr · Tous droits réservés</div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(function(el) {
+            observer.observe(el);
+        });
+    });
+</script>
+</body>
+</html>
