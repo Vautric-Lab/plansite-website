@@ -1,170 +1,1577 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PlanSite — Devis BTP en 2 minutes. 100+ photos modèles.">
-<title>PlanSite — Devis BTP en 2 minutes</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FFFFFF" />
+  <title>PlanSite — Devis BTP en 2 minutes, sur chantier</title>
+  <meta name="description" content="L'application de devis BTP pour les artisans. 162 000 articles, 100+ photos modèles, IA de recherche, mode hors ligne." />
+  <meta property="og:title" content="PlanSite — Devis BTP en 2 minutes" />
+  <meta property="og:description" content="L'application de devis BTP pour les artisans. Photos avant/après, IA, hors ligne." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <style>
+    /* ───────────────────────── Reset & tokens ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-        --blue: #0A84FF;
-        --text: #1C1C1E;
-        --text-sec: #636366;
-        --bg: #F2F2F7;
-        --border: #EEEEEE;
+      --blue: #0A84FF;
+      --blue-dark: #0066CC;
+      --blue-soft: #E8F1FF;
+      --dark: #1C1C1E;
+      --grey: #636366;
+      --grey-light: #8E8E93;
+      --light: #F5F5F7;
+      --border: #EEEEEE;
+      --white: #FFFFFF;
+      --container: 1200px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.08);
     }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
     body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        color: var(--text);
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        background-color: white;
-        -webkit-font-smoothing: antialiased;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                   "Helvetica Neue", "Inter", system-ui, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.5;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
-    * { box-sizing: border-box; }
-    a { text-decoration: none; color: inherit; }
-    p, h1, h2, h3 { margin-top: 0; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-    
-    /* Navigation */
-    .nav-header { display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 15px; border-bottom: 1px solid var(--border); }
-    .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 13px; font-weight: 600; color: var(--text-sec); }
+
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ───────────────────────── Buttons ────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--blue); color: var(--white); }
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(10,132,255,0.28);
+    }
+    .btn-ghost { color: var(--dark); padding-left: 8px; padding-right: 8px; }
+    .btn-ghost:hover { color: var(--blue); }
+    .btn-light {
+      background: var(--white);
+      color: var(--dark);
+      border: 1px solid var(--border);
+    }
+    .btn-light:hover { border-color: var(--dark); }
+    .btn-on-dark {
+      background: var(--white);
+      color: var(--dark);
+    }
+    .btn-on-dark:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+
+    /* App Store / Google Play badge buttons. Mimics the official store
+       badge proportions (small "Disponible sur" + larger store name) so it
+       reads as a download button at a glance. */
+    .btn-store {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 18px 9px 14px;
+      background: var(--dark);
+      color: var(--white);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .btn-store:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+      background: #000;
+    }
+    .btn-store svg { flex-shrink: 0; }
+    .btn-store .store-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.05;
+    }
+    .btn-store .store-pre {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      opacity: 0.78;
+      text-transform: uppercase;
+    }
+    .btn-store .store-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .btn-store.btn-store-light {
+      background: var(--white);
+      color: var(--dark);
+    }
+    .btn-store.btn-store-light:hover {
+      background: var(--white);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+    .store-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ───────────────────────── Nav ────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 16px;
+      row-gap: 8px;
+      min-height: 64px;
+      padding: 12px 0;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+    .logo-mark {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #0A84FF 0%, #4FACFE 100%);
+      display: grid; place-items: center;
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(10,132,255,0.25);
+    }
+    /* Mobile: wraps onto a second row below the logo + CTA so the same
+       link set is visible at every breakpoint (parity with desktop). */
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 18px;
+      row-gap: 6px;
+      order: 3;
+      flex-basis: 100%;
+      justify-content: center;
+      padding-top: 4px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--grey);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+
+    /* ───────────────────────── Hero ───────────────────────────────────── */
+    .hero {
+      padding: 88px 0 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(10,132,255,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .eyebrow .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    h1.hero-title {
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      max-width: 820px;
+      margin: 0 auto 24px;
+      position: relative;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--blue);
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.6vw, 19px);
+      color: var(--grey);
+      max-width: 580px;
+      margin: 0 auto 16px;
+      line-height: 1.55;
+      position: relative;
+    }
+    .hero-meta {
+      font-size: 13px;
+      color: var(--grey);
+      font-weight: 600;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    /* ───────────────────────── Phone mockup ──────────────────────────── */
+    .phone-wrap {
+      max-width: 270px;
+      margin: 56px auto 0;
+      padding: 0 16px;
+      position: relative;
+    }
+    .phone {
+      background: var(--dark);
+      border-radius: 44px;
+      padding: 10px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.28), 0 12px 32px rgba(0,0,0,0.12);
+    }
+    .phone-screen {
+      background: var(--light);
+      border-radius: 36px;
+      overflow: hidden;
+      aspect-ratio: 9 / 19;
+      position: relative;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 10px; left: 50%;
+      transform: translateX(-50%);
+      width: 96px; height: 28px;
+      background: var(--dark);
+      border-radius: 20px;
+      z-index: 5;
+    }
+    .phone-header {
+      background: var(--white);
+      padding: 50px 14px 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .phone-title { font-weight: 800; font-size: 13px; color: var(--dark); }
+    .phone-tabs {
+      display: flex;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .phone-tab {
+      flex: 1;
+      text-align: center;
+      padding: 8px 0 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--grey);
+    }
+    .phone-tab.active {
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+    }
+    .phone-list {
+      padding: 8px 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .phone-row {
+      background: var(--white);
+      border-radius: 11px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .phone-doc-icon {
+      width: 28px; height: 28px;
+      background: var(--blue-soft);
+      border-radius: 8px;
+      display: grid; place-items: center;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+    .phone-row-text { flex: 1; min-width: 0; text-align: left; }
+    .phone-row-name {
+      font-weight: 700;
+      font-size: 10px;
+      color: var(--dark);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .phone-row-id { font-size: 8px; color: var(--grey); }
+    .phone-badge {
+      padding: 3px 7px;
+      border-radius: 20px;
+      font-size: 7px;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+    .phone-badge.sent { background: #FF9500; }
+    .phone-badge.signed { background: #34C759; }
+    .phone-badge.draft { background: #E5E5EA; color: var(--grey); }
+    .phone-fab-row {
+      display: flex;
+      justify-content: flex-end;
+      padding: 4px 12px 6px;
+    }
+    .phone-fab {
+      width: 32px; height: 32px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 300;
+      box-shadow: 0 4px 12px rgba(10,132,255,0.4);
+      line-height: 1;
+    }
+    .phone-tabbar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      padding: 8px 4px 12px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .phone-tabbar svg {
+      width: 18px; height: 18px;
+      color: var(--grey-light);
+    }
+    .phone-tabbar svg.active { color: var(--blue); }
+
+    /* ───────────────────────── Trust bar ──────────────────────────────── */
+    .trust {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 16px;
+      text-align: center;
+    }
+    .trust-item .icon {
+      width: 28px; height: 28px;
+      margin: 0 auto 10px;
+      color: var(--blue);
+    }
+    .trust-item .num {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+    }
+    .trust-item .lbl {
+      font-size: 13px;
+      color: var(--grey);
+      margin-top: 2px;
+    }
+
+    /* ───────────────────────── Sections shared ────────────────────────── */
+    section.feature { padding: 112px 0; }
+    .section-head {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      max-width: 720px;
+      margin: 16px auto;
+    }
+    .section-head p {
+      font-size: 17px;
+      color: var(--grey);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    /* ───────────────── Avant / Après ───────────────── */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .compare-card {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .compare-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .compare-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .compare-card:hover img { transform: scale(1.03); }
+    .compare-tag {
+      position: absolute;
+      top: 16px; left: 16px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+    .compare-tag.after {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    /* ───────────────── Templates ───────────────── */
+    .templates-section { background: var(--light); }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin: 0 auto 48px;
+      max-width: 720px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .chip:hover { border-color: var(--blue); transform: translateY(-1px); }
+
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .tile {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .tile:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .tile img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .tile:hover img { transform: scale(1.04); }
+    .tile-lbl {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 14px 12px 12px;
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.3;
+      background: linear-gradient(0deg, rgba(0,0,0,0.78), transparent);
+    }
+
+    /* ───────────────── How it works (dark) ───────────────── */
+    .steps-section { background: var(--dark); color: var(--white); }
+    .steps-section .section-head h2 { color: var(--white); }
+    .steps-section .section-head p { color: rgba(255,255,255,0.55); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .step-num {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--blue);
+      opacity: 0.85;
+      margin-bottom: 14px;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .step-body {
+      font-size: 14.5px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    /* ───────────────── Features grid ───────────────── */
+    .features-section { background: var(--light); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card .icon {
+      width: 28px; height: 28px;
+      margin-bottom: 18px;
+      color: var(--blue);
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    /* ───────────────── AI Spotlight ───────────────── */
+    .ai-section { background: var(--white); }
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .ai-text h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      margin: 12px 0 16px;
+    }
+    .ai-text p {
+      font-size: 17px;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+    .ai-window {
+      background: var(--white);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+    .ai-titlebar {
+      background: var(--dark);
+      padding: 12px 16px;
+      display: flex;
+      gap: 8px;
+    }
+    .ai-titlebar i {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .ai-titlebar i:nth-child(1) { background: #FF5F57; }
+    .ai-titlebar i:nth-child(2) { background: #FEBC2E; }
+    .ai-titlebar i:nth-child(3) { background: #28C840; }
+    .ai-body { padding: 20px; }
+    .ai-input {
+      background: var(--light);
+      border: 2px solid var(--blue);
+      border-radius: 12px;
+      padding: 13px 15px;
+      font-size: 13px;
+      color: var(--dark);
+      font-style: italic;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+    .ai-meta {
+      font-size: 11px;
+      color: var(--grey);
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ai-results {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .ai-row {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      background: var(--light);
+      border-radius: 10px;
+      font-size: 13px;
+      gap: 8px;
+    }
+    .ai-row .name { color: var(--dark); font-weight: 600; flex: 1; }
+    .ai-row .unit { color: var(--grey); font-size: 11px; }
+
+    /* ───────────────── Price slider ───────────────── */
+    .slider-card {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 36px 32px 32px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .slider-current {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .slider-value {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--blue);
+    }
+    .slider-desc {
+      font-size: 14px;
+      color: var(--grey);
+      margin-top: 4px;
+    }
+    .slider-track {
+      position: relative;
+      height: 6px;
+      background: var(--light);
+      border-radius: 999px;
+      margin: 0 8px;
+    }
+    .slider-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 50%;
+      background: var(--blue);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      width: 22px; height: 22px;
+      background: var(--white);
+      border: 3px solid var(--blue);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 2px 8px rgba(10,132,255,0.35);
+      transition: left 0.3s ease;
+    }
+    .slider-marks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--grey);
+      margin-top: 18px;
+    }
+    .slider-marks span {
+      cursor: pointer;
+      transition: color 0.15s;
+      padding: 4px 0;
+    }
+    .slider-marks span:nth-child(1) { text-align: left; }
+    .slider-marks span:nth-child(2) { text-align: center; }
+    .slider-marks span:nth-child(3) { text-align: right; }
+    .slider-marks span.active { color: var(--blue); }
+    .slider-marks span:hover { color: var(--dark); }
+
+    /* ───────────────── Testimonial ───────────────── */
+    .testimonial-section { background: var(--white); text-align: center; }
+    .testimonial-card {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+    }
+    .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 48px;
+      color: var(--blue);
+      line-height: 0.6;
+      margin-bottom: 18px;
+    }
+    .testimonial-text {
+      font-size: clamp(17px, 2.4vw, 21px);
+      line-height: 1.45;
+      letter-spacing: -0.015em;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--dark);
+      margin-bottom: 28px;
+    }
+    .testimonial-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .avatar {
+      width: 44px; height: 44px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--white);
+    }
+    .testimonial-meta-text { text-align: left; }
+    .testimonial-name { font-weight: 700; font-size: 14px; color: var(--dark); }
+    .testimonial-role { font-size: 12px; color: var(--grey); }
+    .testimonial-disclaimer {
+      font-size: 12.5px;
+      color: var(--grey);
+      font-style: italic;
+      margin-top: 20px;
+    }
+
+    /* ───────────────── Privacy ───────────────── */
+    .privacy-section { background: var(--light); }
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-width: 720px;
+      margin: 0 auto 24px;
+    }
+    .privacy-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid var(--border);
+    }
+    .privacy-card .icon {
+      width: 22px; height: 22px;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .privacy-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .privacy-card p {
+      font-size: 13px;
+      color: var(--grey);
+      line-height: 1.5;
+    }
+    .privacy-link {
+      display: inline-block;
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      width: 100%;
+    }
+    .privacy-link:hover { text-decoration: underline; }
+
+    /* ───────────────── Final CTA ───────────────── */
+    .final {
+      padding: 120px 0;
+      background: var(--dark);
+      color: var(--white);
+      text-align: center;
+    }
+    .final h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      max-width: 640px;
+      margin: 0 auto 16px;
+    }
+    .final p {
+      color: rgba(255,255,255,0.6);
+      font-size: 17px;
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.55;
+    }
+    .final-stores {
+      margin-top: 18px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ───────────────── Footer ───────────────── */
+    footer {
+      padding: 56px 0 36px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .footer-logo {
+      font-weight: 700;
+      font-size: 19px;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .footer-logo .accent { color: var(--blue); }
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--grey);
+      margin-bottom: 4px;
+    }
+    .footer-meta-line {
+      font-size: 12px;
+      color: var(--grey-light);
+      margin-bottom: 28px;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 22px;
+      margin-bottom: 24px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--grey);
+    }
+    .footer-links a:hover { color: var(--dark); }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--grey-light);
+    }
+
+    /* ───────────────────────── Responsive ─────────────────────────────── */
+    @media (min-width: 640px) {
+      .compare { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .tile-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+      .privacy-grid { grid-template-columns: repeat(3, 1fr); }
+      .trust-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    }
     @media (min-width: 768px) {
-        .nav-header { flex-direction: row; justify-content: space-between; height: 64px; padding: 0 24px; }
-        .nav-links { font-size: 14px; gap: 24px; }
+      .nav-inner {
+        flex-wrap: nowrap;
+        height: 64px;
+        min-height: 0;
+        padding: 0;
+        column-gap: 0;
+        row-gap: 0;
+      }
+      .nav-links {
+        flex-basis: auto;
+        order: initial;
+        justify-content: flex-start;
+        column-gap: 36px;
+        padding-top: 0;
+        font-size: 14px;
+      }
+      .nav-links a { font-size: 14px; }
+      .ai-grid { grid-template-columns: 1fr 1fr; gap: 64px; }
+      .steps-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .tile-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+      section.feature { padding: 144px 0; }
     }
 
-    /* Animations */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* Buttons & Badges */
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: white; padding: 16px 32px; border-radius: 50px; font-weight: 700; font-size: 16px; box-shadow: 0 8px 24px rgba(10,132,255,0.25); }
-    .store-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px; }
-    .store-badge { background: var(--text); color: white; padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: 600; }
-
-    /* Avant/Après Grid */
-    .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; background: var(--bg); padding: 12px; border-radius: 18px; }
-    .ba-item { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; }
-    .ba-item img { width: 100%; height: 100%; object-fit: cover; }
-    .ba-label { position: absolute; bottom: 8px; left: 8px; background: rgba(0,0,0,0.6); color: white; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 4px; }
-
-    /* Photo Grid */
-    .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 32px; }
-    .photo-tile { border-radius: 12px; overflow: hidden; aspect-ratio: 1; position: relative; }
-    .photo-tile img { width: 100%; height: 100%; object-fit: cover; }
-    .photo-tile .label { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; font-size: 13px; font-weight: 600; }
-</style>
+    /* ───────────────────────── Reveal on scroll ───────────────────────── */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="nav-header">
-    <div style="font-weight: 800; font-size: 20px;">Plan<span style="color: var(--blue);">Site</span></div>
-    <nav class="nav-links">
-        <a href="#features">Fonctionnalités</a>
-        <a href="#visual">Devis Visuel</a>
-        <a href="#privacy">Confidentialité</a>
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo" aria-label="PlanSite">
+      <span class="logo-mark" aria-hidden="true">P</span>
+      <span>PlanSite</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#features">Fonctionnalités</a>
+      <a href="#templates">Photos modèles</a>
+      <a href="#ai">Intelligence artificielle</a>
+      <a href="#privacy">Confidentialité</a>
     </nav>
-    <a href="mailto:contact@plansite.fr" class="btn-primary" style="padding: 10px 24px; font-size: 14px;">Être notifié</a>
+    <a class="btn btn-primary" href="#download">Être notifié</a>
+  </div>
 </header>
 
-<div style="padding: 80px 0; text-align: center; background: radial-gradient(circle at top, rgba(10,132,255,0.05), transparent);">
-    <div class="container fade-up">
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: #EBF5FF; color: var(--blue); font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 50px; margin-bottom: 24px;">
-            <span style="width: 8px; height: 8px; background: var(--blue); border-radius: 50%;"></span>
-            Bientôt disponible
-        </div>
-        <h1 style="font-size: clamp(38px, 8vw, 68px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 24px;">
-            Votre devis BTP<br />en <span style="color: var(--blue);">2 minutes</span>,<br />sur chantier
-        </h1>
-        <p style="font-size: 18px; color: var(--text-sec); max-width: 540px; margin: 0 auto 32px;">
-            L'application qui permet aux artisans de créer des devis professionnels et illustrés, directement depuis le terrain.
-        </p>
-        <a href="mailto:contact@plansite.fr" class="btn-primary">📬 Être notifié au lancement</a>
-        
-        <div class="store-badges">
-            <a href="#download" class="store-badge"> App Store</a>
-            <a href="#download" class="store-badge">▶ Google Play</a>
-        </div>
-    </div>
-</div>
+<main>
 
-<div style="background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 24px 0;">
-    <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; color: var(--text-sec); font-weight: 600; font-size: 14px;">
-        <span>📦 162 000 articles BTP</span>
-        <span>📍 France entière</span>
-        <span>📸 Devis illustrés</span>
-        <span>📶 100% hors ligne</span>
-    </div>
-</div>
-
-<div id="visual" style="padding: 80px 0; background: white;">
+  <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+  <section class="hero">
     <div class="container">
-        <div class="fade-up" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center;">
-            <div>
-                <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px;">Devis Visuel</div>
-                <h2 style="font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px;">Plus qu'un devis,<br>une vitrine.</h2>
-                <p style="color: var(--text-sec); font-size: 16px; margin-bottom: 24px;">
-                    Intégrez vos photos de chantier ou piochez dans notre bibliothèque de <strong>100+ modèles professionnels</strong>. Montrez le résultat avant même de commencer.
-                </p>
-                <div style="padding: 16px; background: var(--bg); border-radius: 12px; border-left: 4px solid var(--blue);">
-                    <p style="font-size: 14px; font-weight: 700; margin-bottom: 4px;">Positionnement Tarifaire</p>
-                    <p style="font-size: 13px; color: var(--text-sec); margin-bottom: 0;">Adaptez vos prix au marché d'un simple clic : Économique, Standard ou Haut de Gamme.</p>
-                </div>
-            </div>
-            <div class="ba-grid">
-                <div class="ba-item">
-                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80" alt="Avant">
-                    <span class="ba-label">AVANT</span>
-                </div>
-                <div class="ba-item">
-                    <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80" alt="Après">
-                    <span class="ba-label" style="background: var(--blue);">APRÈS</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="fade-up" style="margin-top: 64px;">
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; font-size: 13px; font-weight: 600;">
-                <span style="background: var(--bg); padding: 6px 14px; border-radius: 50px;">Maçonnerie</span>
-                <span style="background: var(--bg); padding: 6px 14px; border-radius: 50px;">Plomberie</span>
-                <span style="background: var(--bg); padding: 6px 14px; border-radius: 50px;">Électricité</span>
-                <span style="background: var(--bg); padding: 6px 14px; border-radius: 50px;">Menuiserie</span>
-                <span style="background: var(--bg); padding: 6px 14px; border-radius: 50px;">Peinture</span>
-                <span style="background: var(--text); color: white; padding: 6px 14px; border-radius: 50px;">Et plus...</span>
-            </div>
-            <div class="photo-grid">
-                <div class="photo-tile"><img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=400&q=80"><div class="label">Salle de bain</div></div>
-                <div class="photo-tile"><img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=400&q=80"><div class="label">Piscine</div></div>
-                <div class="photo-tile"><img src="https://images.unsplash.com/photo-1628745277861-1279ce1c8d57?w=400&q=80"><div class="label">Pierre apparente</div></div>
-                <div class="photo-tile"><img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?w=400&q=80"><div class="label">Parquet chêne</div></div>
-            </div>
-        </div>
-    </div>
-</div>
+      <span class="eyebrow"><span class="dot"></span>Bientôt disponible</span>
+      <h1 class="hero-title">Votre devis BTP en <em>2 minutes</em>, sur chantier.</h1>
+      <p class="hero-sub">
+        L'application qui permet aux artisans de créer des devis professionnels et illustrés, directement depuis le terrain.
+      </p>
+      <p class="hero-meta">162 000 articles BTP · Prix actualisés 2026 · Fonctionne hors ligne</p>
+      <div class="hero-ctas store-row">
+        <!--
+          TODO: Replace href values with the real App Store / Google Play
+          listing URLs once the apps are published. For now they anchor to
+          the email-signup CTA so visitors aren't sent to a 404 page.
+        -->
+        <a class="btn-store" href="#download" aria-label="Télécharger sur l'App Store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.36-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.36C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+          <span class="store-text">
+            <span class="store-pre">Télécharger sur l'</span>
+            <span class="store-name">App Store</span>
+          </span>
+        </a>
+        <a class="btn-store" href="#download" aria-label="Disponible sur Google Play">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.61 1.81a1.5 1.5 0 0 0-.61 1.21v17.96a1.5 1.5 0 0 0 .61 1.21l10.18-10.19L3.61 1.81z" fill="#34a853"/>
+            <path d="M17.96 8.95l-3.36-1.95-3.42 3.42 3.42 3.42 3.36-1.95a1.5 1.5 0 0 0 0-2.94z" fill="#fbbc04"/>
+            <path d="M3.61 22.19c.31.31.79.42 1.22.18l11.73-6.66-3.42-3.42L3.61 22.19z" fill="#ea4335"/>
+            <path d="M16.56 8.29L4.83 1.63a1.5 1.5 0 0 0-1.22.18l9.53 9.59 3.42-3.11z" fill="#4285f4"/>
+          </svg>
+          <span class="store-text">
+            <span class="store-pre">Disponible sur</span>
+            <span class="store-name">Google Play</span>
+          </span>
+        </a>
+        <a class="btn btn-ghost" href="#features">Voir les fonctionnalités →</a>
+      </div>
 
-<footer id="privacy" style="padding: 60px 0; text-align: center; border-top: 1px solid var(--border); background: var(--bg);">
-    <div class="container">
-        <p style="font-weight: 800; font-size: 24px; margin-bottom: 8px;">Plan<span style="color: var(--blue);">Site</span></p>
-        <p style="font-size: 14px; color: var(--text-sec); margin-bottom: 24px;">Fait pour les artisans, par des artisans.</p>
-        <div style="display: flex; justify-content: center; gap: 20px; font-size: 13px; font-weight: 600;">
-            <a href="https://plansite.fr/privacy" style="color: var(--blue);">Politique de confidentialité</a>
-            <a href="mailto:contact@plansite.fr" style="color: var(--text-sec);">contact@plansite.fr</a>
+      <!-- Phone mockup -->
+      <div class="phone-wrap reveal">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch" aria-hidden="true"></div>
+
+            <div class="phone-header">
+              <div class="phone-title">Mes documents</div>
+            </div>
+
+            <div class="phone-tabs">
+              <div class="phone-tab active">Devis</div>
+              <div class="phone-tab">Facture</div>
+            </div>
+
+            <div class="phone-list">
+              <div class="phone-row">
+                <div class="phone-doc-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+                </div>
+                <div class="phone-row-text">
+                  <div class="phone-row-name">Dubois Maçonnerie</div>
+                  <div class="phone-row-id">#DEV-2026-003</div>
+                </div>
+                <span class="phone-badge sent">Envoyé</span>
+              </div>
+
+              <div class="phone-row">
+                <div class="phone-doc-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+                </div>
+                <div class="phone-row-text">
+                  <div class="phone-row-name">SCI Les Oliviers</div>
+                  <div class="phone-row-id">#DEV-2026-002</div>
+                </div>
+                <span class="phone-badge signed">Signé</span>
+              </div>
+
+              <div class="phone-row">
+                <div class="phone-doc-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+                </div>
+                <div class="phone-row-text">
+                  <div class="phone-row-name">Rénovation Lefèvre</div>
+                  <div class="phone-row-id">#DEV-2026-001</div>
+                </div>
+                <span class="phone-badge draft">Brouillon</span>
+              </div>
+            </div>
+
+            <div class="phone-fab-row">
+              <div class="phone-fab" aria-hidden="true">+</div>
+            </div>
+
+            <div class="phone-tabbar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 9v12h14V9"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 3v4M16 3v4"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h4l2-2h6l2 2h4v13H3z"/></svg>
+              <svg class="active" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h6l2 2h10v10H3z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15 20a5 5 0 0 1 6-4.9"/></svg>
+            </div>
+          </div>
         </div>
-        <p style="font-size: 12px; color: var(--text-sec); margin-top: 24px;">© 2026 Vautric Lab · Tous droits réservés</p>
+      </div>
     </div>
+  </section>
+
+  <!-- ═══════════════════════════ TRUST BAR ═══════════════════════════ -->
+  <section class="trust" aria-label="Chiffres clés">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="4" rx="1"/>
+          <rect x="3" y="10" width="18" height="4" rx="1"/>
+          <rect x="3" y="16" width="18" height="4" rx="1"/>
+        </svg>
+        <div class="num">162 000+</div>
+        <div class="lbl">Articles BTP catalogués</div>
+      </div>
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18"/>
+          <path d="M12 3a14 14 0 0 1 0 18"/>
+          <path d="M12 3a14 14 0 0 0 0 18"/>
+        </svg>
+        <div class="num">France entière</div>
+        <div class="lbl">Tarifs actualisés 2026</div>
+      </div>
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 2l20 20"/>
+          <path d="M5 12.55a11 11 0 0 1 5.17-2.39"/>
+          <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+          <path d="M1.42 9a16 16 0 0 1 4.7-2.88"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+          <circle cx="12" cy="20" r="0.5" fill="currentColor"/>
+        </svg>
+        <div class="num">Hors ligne</div>
+        <div class="lbl">Fonctionne sans réseau</div>
+      </div>
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2V3z"/>
+          <path d="M9 9h6"/>
+          <path d="M9 13h6"/>
+        </svg>
+        <div class="num">Prêt 2026</div>
+        <div class="lbl">Facturation électronique</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ DEVIS VISUEL ═══════════════════════════ -->
+  <section id="features" class="feature">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Devis Visuel</span>
+        <h2>Vos chantiers parlent d'eux-mêmes.</h2>
+        <p>Joignez des photos avant/après à chaque devis. Vos clients voient la transformation. Vous gagnez la confiance dès le premier rendez-vous.</p>
+      </div>
+      <div class="compare reveal">
+        <figure class="compare-card">
+          <img src="https://images.unsplash.com/photo-1749532125405-70950966b0e5?w=1200&q=80&auto=format&fit=crop" alt="Salle de bain avant rénovation par un plombier artisan" loading="lazy" />
+          <figcaption class="compare-tag">Avant</figcaption>
+        </figure>
+        <figure class="compare-card">
+          <img src="https://images.unsplash.com/photo-1719321063823-d8d85757215c?w=1200&q=80&auto=format&fit=crop" alt="Salle de bain rénovée par un artisan solo" loading="lazy" />
+          <figcaption class="compare-tag after">Après</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PHOTO LIBRARY ═══════════════════════════ -->
+  <section id="templates" class="feature templates-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Bibliothèque photos</span>
+        <h2>100+ photos modèles, prêtes à l'emploi.</h2>
+        <p>Pas le temps de sortir l'appareil photo sur le chantier ? Sélectionnez plusieurs photos pré-curées et glissez-les dans votre devis en un geste.</p>
+      </div>
+
+      <div class="chips reveal" role="list" aria-label="Corps de métier couverts">
+        <span class="chip" role="listitem">Maçonnerie</span>
+        <span class="chip" role="listitem">Plomberie</span>
+        <span class="chip" role="listitem">Électricité</span>
+        <span class="chip" role="listitem">Menuiserie</span>
+        <span class="chip" role="listitem">Peinture</span>
+        <span class="chip" role="listitem">Couverture</span>
+        <span class="chip" role="listitem">Charpente</span>
+        <span class="chip" role="listitem">Jardinage</span>
+        <span class="chip" role="listitem">Piscine</span>
+        <span class="chip" role="listitem">Terrassement</span>
+        <span class="chip" role="listitem">Façade</span>
+        <span class="chip" role="listitem">Et plus</span>
+      </div>
+
+      <div class="tile-grid reveal">
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1719321063823-d8d85757215c?w=600&q=70&auto=format&fit=crop" alt="Salle de bain contemporaine" loading="lazy" />
+          <figcaption class="tile-lbl">Salle de bain contemporaine</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=600&q=70&auto=format&fit=crop" alt="Piscine carrelée bleu azur" loading="lazy" />
+          <figcaption class="tile-lbl">Piscine carrelée bleu azur</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1494067329533-4385a4867cd4?w=600&q=70&auto=format&fit=crop" alt="Pierre apparente premium" loading="lazy" />
+          <figcaption class="tile-lbl">Pierre apparente premium</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1559634946-5856e4b8e613?w=600&q=70&auto=format&fit=crop" alt="Pose parquet chêne massif" loading="lazy" />
+          <figcaption class="tile-lbl">Pose parquet chêne massif</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1700689807667-82630348b301?w=600&q=70&auto=format&fit=crop" alt="Allée pavée et plantations" loading="lazy" />
+          <figcaption class="tile-lbl">Allée pavée et plantations</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1717281234297-3def5ae3eee1?w=600&q=70&auto=format&fit=crop" alt="Peinture murale intérieure" loading="lazy" />
+          <figcaption class="tile-lbl">Peinture murale intérieure</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1635335874521-7987db781153?w=600&q=70&auto=format&fit=crop" alt="Tableau électrique aux normes" loading="lazy" />
+          <figcaption class="tile-lbl">Tableau électrique aux normes</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="https://images.unsplash.com/photo-1583024011792-b165975b52f5?w=600&q=70&auto=format&fit=crop" alt="Décapage et nivellement" loading="lazy" />
+          <figcaption class="tile-lbl">Décapage et nivellement</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ HOW IT WORKS ═══════════════════════════ -->
+  <section class="feature steps-section">
+    <div class="container">
+      <div class="section-head reveal" style="text-align: left; max-width: 720px; margin-left: 0;">
+        <span class="section-eyebrow">Comment ça marche</span>
+        <h2 style="margin-left: 0;">Votre devis, en 3 étapes.</h2>
+        <p style="margin-left: 0;">Pas de formation. Pas de manuel. Votre premier devis en 2 minutes.</p>
+      </div>
+      <div class="steps-grid reveal">
+        <div>
+          <div class="step-num">01</div>
+          <div class="step-title">Décrivez le chantier</div>
+          <p class="step-body">Tapez ou dictez votre description. « Rénovation salle de bain avec carrelage et nouvelle douche. »</p>
+        </div>
+        <div>
+          <div class="step-num">02</div>
+          <div class="step-title">L'IA trouve les articles</div>
+          <p class="step-body">PlanSite sélectionne les articles correspondants dans sa base de 162 000 prix avec les tarifs à jour.</p>
+        </div>
+        <div>
+          <div class="step-num">03</div>
+          <div class="step-title">Envoyez le devis</div>
+          <p class="step-body">Ajustez les quantités, ajoutez vos photos, générez le PDF, partagez. Le tout en 2 minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FEATURES GRID ═══════════════════════════ -->
+  <section class="feature features-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Fonctionnalités</span>
+        <h2>Tout ce dont l'artisan a besoin.</h2>
+        <p>Conçu pour être utilisé directement sur le terrain, sans formation ni manuel. Rapide, fiable, professionnel.</p>
+      </div>
+      <div class="features-grid reveal">
+        <article class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+            <path d="M19 14l.75 2.25L22 17l-2.25.75L19 20l-.75-2.25L16 17l2.25-.75L19 14z"/>
+          </svg>
+          <h3>Recherche IA par description</h3>
+          <p>Décrivez votre chantier naturellement — PlanSite trouve les articles et leur prix instantanément, sans catalogue PDF.</p>
+        </article>
+
+        <article class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="3" width="6" height="12" rx="3"/>
+            <path d="M5 11a7 7 0 0 0 14 0"/>
+            <path d="M12 18v3"/>
+          </svg>
+          <h3>Recherche vocale</h3>
+          <p>Parlez à l'application mains libres. Idéal sur chantier quand on ne peut pas taper.</p>
+        </article>
+
+        <article class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+            <path d="M14 3v6h6"/>
+            <path d="M9 13h6M9 17h4"/>
+          </svg>
+          <h3>PDF professionnel en 1 clic</h3>
+          <p>Devis généré automatiquement en PDF prêt à envoyer. Mise en page soignée, mentions légales incluses.</p>
+        </article>
+
+        <article class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M3 5v6c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+            <path d="M3 11v6c0 1.66 4 3 9 3s9-1.34 9-3v-6"/>
+          </svg>
+          <h3>162 000 articles BTP</h3>
+          <p>Base complète par corps de métier — maçonnerie, terrassement, électricité, plomberie, peinture et bien plus.</p>
+        </article>
+
+        <article class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 2l20 20"/>
+            <path d="M5 12.55a11 11 0 0 1 5.17-2.39"/>
+            <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+            <path d="M1.42 9a16 16 0 0 1 4.7-2.88"/>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+            <circle cx="12" cy="20" r="0.5" fill="currentColor"/>
+          </svg>
+          <h3>Fonctionne sans connexion</h3>
+          <p>Pas de signal sur le chantier ? Aucun problème. PlanSite tourne entièrement en local sur votre appareil.</p>
+        </article>
+
+        <article class="feature-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2V3z"/>
+            <path d="M8 9h8M8 13h8"/>
+          </svg>
+          <h3>Prêt pour 2026 / 2027</h3>
+          <p>Compatible avec la réforme de la facturation électronique obligatoire pour les artisans français.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ AI SPOTLIGHT ═══════════════════════════ -->
+  <section id="ai" class="feature ai-section">
+    <div class="container">
+      <div class="ai-grid">
+        <div class="ai-text reveal">
+          <span class="section-eyebrow">Intelligence artificielle</span>
+          <h2>Parlez,<br>PlanSite comprend.</h2>
+          <p>Finies les longues recherches dans des catalogues PDF. Décrivez ce que vous faites — on trouve le reste, avec les bons prix pour votre activité.</p>
+        </div>
+        <div class="ai-window reveal">
+          <div class="ai-titlebar" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </div>
+          <div class="ai-body">
+            <div class="ai-input">« Rénovation salle de bain avec carrelage et nouvelle douche »</div>
+            <div class="ai-meta">4 articles trouvés</div>
+            <div class="ai-results">
+              <div class="ai-row"><span class="name">Dépose carrelage existant</span><span class="unit">m²</span></div>
+              <div class="ai-row"><span class="name">Fourniture et pose carrelage sol</span><span class="unit">m²</span></div>
+              <div class="ai-row"><span class="name">Receveur de douche à l'italienne</span><span class="unit">u</span></div>
+              <div class="ai-row"><span class="name">Faïence murale salle de bain</span><span class="unit">m²</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PRICE SLIDER ═══════════════════════════ -->
+  <section id="pricing" class="feature templates-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Positionnement tarifaire</span>
+        <h2>Adaptez vos prix à votre marché.</h2>
+        <p>Du chantier économique au haut de gamme — un curseur, et l'ensemble de vos tarifs s'ajuste pour votre clientèle.</p>
+      </div>
+      <div class="slider-card reveal">
+        <div class="slider-current">
+          <div class="slider-value" id="sliderValue">Marché</div>
+          <div class="slider-desc" id="sliderDesc">Tarifs alignés sur le marché national, équilibre qualité/prix.</div>
+        </div>
+        <div class="slider-track">
+          <div class="slider-fill" id="sliderFill"></div>
+          <div class="slider-thumb" id="sliderThumb" style="left: 50%;"></div>
+        </div>
+        <div class="slider-marks" id="sliderMarks">
+          <span data-pos="0">Économique</span>
+          <span data-pos="50" class="active">Marché</span>
+          <span data-pos="100">Haut de gamme</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ TESTIMONIAL ═══════════════════════════ -->
+  <section class="feature testimonial-section">
+    <div class="container">
+      <div class="reveal">
+        <div style="margin-bottom: 28px;">
+          <span class="section-eyebrow">Témoignages</span>
+        </div>
+        <div class="testimonial-card">
+          <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+          <p class="testimonial-text">Avant je passais une heure sur chaque devis. Maintenant c'est fait avant de quitter le chantier.</p>
+          <div class="testimonial-meta">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div class="testimonial-meta-text">
+              <div class="testimonial-name">Un artisan BTP</div>
+              <div class="testimonial-role">Terrassier · Programme bêta</div>
+            </div>
+          </div>
+        </div>
+        <p class="testimonial-disclaimer">PlanSite est actuellement en phase de test avec des artisans BTP de toute la France.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PRIVACY ═══════════════════════════ -->
+  <section id="privacy" class="feature privacy-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Confidentialité</span>
+        <h2>Vos données vous appartiennent.</h2>
+        <p>Vos devis, factures et informations clients sont stockés localement sur votre appareil — ils ne quittent pas votre téléphone sans votre accord.</p>
+      </div>
+      <div class="privacy-grid reveal">
+        <article class="privacy-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="11" width="16" height="10" rx="2"/>
+            <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+          </svg>
+          <h4>Stockage local</h4>
+          <p>Sur votre appareil, pas sur nos serveurs.</p>
+        </article>
+        <article class="privacy-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 2l20 20"/>
+            <path d="M9.88 9.88a3 3 0 0 0 4.24 4.24"/>
+            <path d="M10.73 5.08A11 11 0 0 1 12 5c5 0 9 5 9 7-.34.96-1.05 2.04-2.05 3.05"/>
+            <path d="M6.61 6.61C4.62 7.86 3.34 9.81 3 11c0 2 4 7 9 7 1.6 0 3.18-.5 4.5-1.3"/>
+          </svg>
+          <h4>Aucune publicité</h4>
+          <p>Vos données ne sont jamais vendues.</p>
+        </article>
+        <article class="privacy-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/>
+            <path d="M9 12l2 2 4-4"/>
+          </svg>
+          <h4>Conforme RGPD</h4>
+          <p>Accès, correction ou suppression à tout moment.</p>
+        </article>
+      </div>
+      <p style="text-align: center; margin-top: 24px;">
+        <a class="privacy-link" href="https://plansite.fr/privacy">Lire la politique de confidentialité complète →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ FINAL CTA ═══════════════════════════ -->
+  <section id="download" class="final">
+    <div class="container">
+      <h2>Prêt pour le lancement ?</h2>
+      <p>Bientôt disponible sur iOS et Android. Inscrivez-vous pour être notifié en premier et accéder au programme bêta.</p>
+      <a class="btn btn-on-dark" href="mailto:contact@plansite.fr?subject=Je veux tester PlanSite">Être notifié au lancement</a>
+      <!--
+        TODO: Replace href values with the real App Store / Google Play URLs
+        once the apps are published. They link to the email signup for now.
+      -->
+      <div class="store-row" style="margin-top: 24px;">
+        <a class="btn-store btn-store-light" href="#download" aria-label="Télécharger sur l'App Store">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.36-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.36C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+          <span class="store-text">
+            <span class="store-pre">Télécharger sur l'</span>
+            <span class="store-name">App Store</span>
+          </span>
+        </a>
+        <a class="btn-store btn-store-light" href="#download" aria-label="Disponible sur Google Play">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.61 1.81a1.5 1.5 0 0 0-.61 1.21v17.96a1.5 1.5 0 0 0 .61 1.21l10.18-10.19L3.61 1.81z" fill="#34a853"/>
+            <path d="M17.96 8.95l-3.36-1.95-3.42 3.42 3.42 3.42 3.36-1.95a1.5 1.5 0 0 0 0-2.94z" fill="#fbbc04"/>
+            <path d="M3.61 22.19c.31.31.79.42 1.22.18l11.73-6.66-3.42-3.42L3.61 22.19z" fill="#ea4335"/>
+            <path d="M16.56 8.29L4.83 1.63a1.5 1.5 0 0 0-1.22.18l9.53 9.59 3.42-3.11z" fill="#4285f4"/>
+          </svg>
+          <span class="store-text">
+            <span class="store-pre">Disponible sur</span>
+            <span class="store-name">Google Play</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">Plan<span class="accent">Site</span></div>
+    <div class="footer-tagline">Le chiffrage BTP intelligent</div>
+    <div class="footer-meta-line">Fait pour les artisans, par des artisans.</div>
+    <nav class="footer-links" aria-label="Liens">
+      <a href="https://plansite.fr/privacy">Politique de confidentialité</a>
+      <a href="mailto:contact@plansite.fr">contact@plansite.fr</a>
+      <a href="https://plansite.fr">plansite.fr</a>
+    </nav>
+    <div class="footer-copy">© 2026 Vautric Lab — plansite.fr · Tous droits réservés</div>
+  </div>
 </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  document.addEventListener('DOMContentLoaded', function () {
+    // Reveal-on-scroll
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+    // Price-level slider demo (3 discrete positions)
+    var fill = document.getElementById('sliderFill');
+    var thumb = document.getElementById('sliderThumb');
+    var value = document.getElementById('sliderValue');
+    var desc = document.getElementById('sliderDesc');
+    var marks = document.querySelectorAll('#sliderMarks span');
+    var POSITIONS = {
+      0:   { label: 'Économique',   desc: 'Idéal pour gagner des marchés concurrentiels.' },
+      50:  { label: 'Marché',       desc: 'Tarifs alignés sur le marché national, équilibre qualité/prix.' },
+      100: { label: 'Haut de gamme', desc: 'Finitions premium, clientèle exigeante.' }
+    };
+    marks.forEach(function (m) {
+      m.addEventListener('click', function () {
+        var pos = Number(m.dataset.pos);
+        fill.style.width = pos + '%';
+        thumb.style.left = pos + '%';
+        value.textContent = POSITIONS[pos].label;
+        desc.textContent = POSITIONS[pos].desc;
+        marks.forEach(function (x) { x.classList.toggle('active', x === m); });
+      });
     });
+  });
 </script>
+
 </body>
 </html>
